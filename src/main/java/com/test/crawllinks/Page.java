@@ -20,10 +20,7 @@ public class Page {
     }
 
     public List<Page> getPageLinks() {
-        if (pageLinks.isEmpty()){
-            return null;
-        }
-        return pageLinks;
+         return pageLinks;
     }
     public void addLink(Page page) {
         this.pageLinks.add(page);

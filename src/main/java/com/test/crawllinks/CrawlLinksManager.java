@@ -16,20 +16,18 @@ public class CrawlLinksManager {
     Set<String> alreadyVisited = new HashSet<String>();
 
     public Page crawlLinks(String URL, int crawlingDepth) throws IOException {
+        alreadyVisited.clear();
         Page root = new Page(URL);
         crawlLinksInternal(crawlingDepth, 0, root);
         return root;
     }
 
     private void crawlLinksInternal(int crawlingDepth, int depth, Page parent) throws IOException {
-        if (crawlingDepth < depth){
+        if (depth >= crawlingDepth ){
             return;
         }
 
         crawlPage(parent);
-        if (parent.getPageLinks() == null){
-            return;
-        }
         for (Page link: parent.getPageLinks()){
             crawlLinksInternal(crawlingDepth, ++depth, link);
         }
