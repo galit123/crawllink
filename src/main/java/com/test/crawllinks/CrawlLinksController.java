@@ -22,8 +22,7 @@ public class CrawlLinksController {
         try {
             return crawlLinksManager.crawlLinks(URL, crawlingDepth);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new CrawlLinksRuntimeException(e);
         }
-        return page;
     }
 }

@@ -40,6 +40,10 @@ public class CrawlLinksManager {
         }
         alreadyVisited.add(page.getPageURL());
 
+        if ((page.getPageURL() == null) || (page.getPageURL().isEmpty())){
+            return;
+        }
+
         Connection connection = Jsoup.connect(page.getPageURL());
         Document htmlDocument = connection.get();
         Elements linksOnPage = htmlDocument.select("a[href]");
