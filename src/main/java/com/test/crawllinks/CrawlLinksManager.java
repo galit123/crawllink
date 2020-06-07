@@ -22,13 +22,13 @@ public class CrawlLinksManager {
         return root;
     }
 
-    private void crawlLinksInternal(int crawlingDepth, int depth, Page parent) throws IOException {
+    private void crawlLinksInternal(int crawlingDepth, int depth, Page page) throws IOException {
         if (depth >= crawlingDepth ){
             return;
         }
 
-        crawlPage(parent);
-        for (Page link: parent.getPageLinks()){
+        crawlPage(page);
+        for (Page link: page.getPageLinks()){
             crawlLinksInternal(crawlingDepth, ++depth, link);
         }
 
