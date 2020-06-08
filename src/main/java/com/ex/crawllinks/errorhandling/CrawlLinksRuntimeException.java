@@ -1,4 +1,4 @@
-package com.test.crawllinks;
+package com.ex.crawllinks.errorhandling;
 
 public class CrawlLinksRuntimeException extends RuntimeException{
     public CrawlLinksRuntimeException(Throwable cause) {

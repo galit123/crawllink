@@ -1,5 +1,6 @@
-package com.test.crawllinks;
+package com.ex.crawllinks.errorhandling;
 
+import com.ex.crawllinks.response.CrawlLinksResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

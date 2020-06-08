@@ -1,4 +1,4 @@
-package com.test.crawllinks;
+package com.ex.crawllinks.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.test.crawllinks;
+package com.ex.crawllinks.impl;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;

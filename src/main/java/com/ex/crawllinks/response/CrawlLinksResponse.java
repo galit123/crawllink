@@ -1,4 +1,4 @@
-package com.test.crawllinks;
+package com.ex.crawllinks.response;
 
 import org.springframework.http.HttpStatus;
 

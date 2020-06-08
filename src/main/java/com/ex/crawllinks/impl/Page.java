@@ -1,4 +1,4 @@
-package com.test.crawllinks;
+package com.ex.crawllinks.impl;
 
 import java.util.ArrayList;
 import java.util.List;
