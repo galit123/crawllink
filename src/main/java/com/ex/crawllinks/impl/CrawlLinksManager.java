@@ -14,14 +14,14 @@ public class CrawlLinksManager {
     private JsoupWrapper jsoupWrapper;
     private Set<String> alreadyVisited = new HashSet<String>();
 
-    public Page crawlLinks(String URL, int crawlingDepth) throws IOException {
+    public Page crawlLinks(String URL, int crawlingDepth) {
         alreadyVisited.clear();
         Page root = new Page(URL);
         crawlPageLinks(crawlingDepth, 0, root);
         return root;
     }
 
-    private void crawlPageLinks(int crawlingDepth, int depth, Page page) throws IOException {
+    private void crawlPageLinks(int crawlingDepth, int depth, Page page)  {
         if (depth >= crawlingDepth ){
             return;
         }

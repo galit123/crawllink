@@ -1,17 +1,23 @@
 package com.ex.crawllinks.response;
 
+import com.ex.crawllinks.impl.Page;
 import org.springframework.http.HttpStatus;
 
 public class CrawlLinksResponse {
-    private HttpStatus statusCode;
     private String message;
+    private Page root;
 
-    public HttpStatus getStatusCode() {
-        return statusCode;
+    public Page getRoot() {
+        return root;
     }
 
-    public void setStatusCode(HttpStatus statusCode) {
-        this.statusCode = statusCode;
+    public void setRoot(Page root) {
+        this.root = root;
+    }
+
+    public CrawlLinksResponse(String message, Page root) {
+        this.message = message;
+        this.root = root;
     }
 
     public String getMessage() {
