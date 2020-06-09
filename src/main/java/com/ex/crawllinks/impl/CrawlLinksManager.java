@@ -3,7 +3,6 @@ package com.ex.crawllinks.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +10,7 @@ import java.util.Set;
 public class CrawlLinksManager {
 
     @Autowired
-    private JsoupWrapper jsoupWrapper;
+    private PageCrawler pageCrawler;
     private Set<String> alreadyVisited = new HashSet<String>();
 
     public Page crawlLinks(String URL, int crawlingDepth) {
@@ -35,7 +34,7 @@ public class CrawlLinksManager {
             return;
         }
 
-        jsoupWrapper.crawlPage(page);
+        pageCrawler.crawlPage(page);
 
         for (Page link: page.getPageLinks()){
             crawlPageLinks(crawlingDepth, ++depth, link);

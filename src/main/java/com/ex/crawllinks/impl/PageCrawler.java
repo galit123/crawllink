@@ -14,7 +14,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 @Component
-public class JsoupWrapper {
+public class PageCrawler {
 
     private boolean isNotScannable(String urlAddress) {
         //check if valid image
