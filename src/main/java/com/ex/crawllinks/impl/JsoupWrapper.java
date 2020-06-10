@@ -17,11 +17,11 @@ import java.util.Set;
 
 public class JsoupWrapper {
     private int statusCode;
-    private IPage pageUtil;
+    private IPageUtils pageUtils;
     private List<Page> pageLinks = null;
 
-    public JsoupWrapper(IPage page) {
-        pageUtil = page;
+    public JsoupWrapper(IPageUtils pageUtils) {
+        pageUtils = pageUtils;
     }
 
     public int getStatusCode() {
@@ -47,7 +47,7 @@ public class JsoupWrapper {
             return;
         }
 
-        if (!pageUtil.isScannable(url)){
+        if (!pageUtils.isScannable(url)){
             return;
         }
         Elements linksOnPage = document.select("a[href]");
@@ -58,7 +58,7 @@ public class JsoupWrapper {
         List<Page> pages = new ArrayList<Page>();
         for (Element link : linksOnPage) {
             String linkUrl = link.absUrl("href");
-            if (pageUtil.isValid(linkUrl) && !(pageUtil.isAlreadyVisited(linkUrl))){
+            if (pageUtils.isValid(linkUrl) && !(pageUtils.isAlreadyVisited(linkUrl))){
                 Page linkPage = new Page(linkUrl);
                 pages.add(linkPage);
             }

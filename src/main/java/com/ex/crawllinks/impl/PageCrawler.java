@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public class PageCrawler implements IPage {
+public class PageCrawler implements IPageUtils {
     private Set<String> alreadyVisited = new HashSet<String>();
 
     public static Set<String> notScannable = new HashSet<String>();
