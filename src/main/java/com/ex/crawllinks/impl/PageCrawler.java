@@ -42,6 +42,10 @@ public class PageCrawler implements IPageUtils {
     }
 
     public void crawlPage(int crawlingDepth, int depth, Page parent) {
+        for(int i = 0; i < depth;i++){ System.out.print(" "); } // leading spaces
+
+        System.out.println("Start " + parent.getPageURL());
+
         JsoupWrapper jsoupWrapper = new JsoupWrapper(this);
         jsoupWrapper.scan(parent.getPageURL());
 
@@ -51,15 +55,12 @@ public class PageCrawler implements IPageUtils {
         }
         parent.setPageLinks(jsoupWrapper.getPageLinks());
         if (parent.getPageLinks() != null) {
-            int i = 0;
             for (Page link : parent.getPageLinks()) {
-                System.out.println(depth + "." + i + ", url = " + link.getPageURL());
                 crawlPage(crawlingDepth, depth + 1, link);
-                i++;
             }
         }
 
-        System.out.println("Done children of " + parent.getPageURL());
+        System.out.println("Done " + parent.getPageURL());
     }
 
     @Override

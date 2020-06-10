@@ -47,9 +47,6 @@ public class JsoupWrapper {
         }
         Elements linksOnPage = document.select("a[href]");
 
-        int size = linksOnPage.size();
-        System.out.println("Children num = " + size);
-
         List<Page> pages = new ArrayList<Page>();
         for (Element link : linksOnPage) {
             String linkUrl = link.absUrl("href");
