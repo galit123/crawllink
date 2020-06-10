@@ -28,11 +28,11 @@ public class AsyncPageCrawler extends PageCrawler implements IAsyncCrawler {
             return;
         }
         executor.execute(new AsyncJsoupWrapper(root.getPageURL(), depth,this, this));//calling execute method of ExecutorService
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
     }
