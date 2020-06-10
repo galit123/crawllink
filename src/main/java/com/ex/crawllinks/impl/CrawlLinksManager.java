@@ -3,6 +3,7 @@ package com.ex.crawllinks.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,33 +12,20 @@ public class CrawlLinksManager {
 
     @Autowired
     private PageCrawler pageCrawler;
-    private Set<String> alreadyVisited = new HashSet<String>();
 
     public Page crawlLinks(String URL, int crawlingDepth) {
-        alreadyVisited.clear();
+        System.out.println("Start CrawlLinks");
+
+        long start = new Date().getTime();
         Page root = new Page(URL);
-        crawlPageLinks(crawlingDepth, 0, root);
+        pageCrawler.init(root);
+
+        pageCrawler.crawlPage(crawlingDepth, 0, root);
+        long end = new Date().getTime();
+        long time = end - start;
+
+        System.out.println("Finished in " + time / 1000 + " sec");
         return root;
     }
 
-    private void crawlPageLinks(int crawlingDepth, int depth, Page page)  {
-        if (depth >= crawlingDepth ){
-            return;
-        }
-
-        if (alreadyVisited.contains(page.getPageURL())){
-            return;
-        }
-        alreadyVisited.add(page.getPageURL());
-
-        if ((page.getPageURL() == null) || (page.getPageURL().isEmpty())){
-            return;
-        }
-
-        pageCrawler.crawlPage(page);
-
-        for (Page link: page.getPageLinks()){
-            crawlPageLinks(crawlingDepth, ++depth, link);
-        }
-    }
 }

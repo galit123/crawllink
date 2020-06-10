@@ -1,11 +1,24 @@
 package com.ex.crawllinks.impl;
 
+import org.springframework.http.HttpStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Page {
     private String pageURL;
+    private int statusCode;
     private List<Page> pageLinks = new ArrayList<Page>();
+
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
+    }
+
 
     public Page(String URL) {
         this.pageURL = URL;
