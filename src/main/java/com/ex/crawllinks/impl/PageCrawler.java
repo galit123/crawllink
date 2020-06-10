@@ -43,9 +43,8 @@ public class PageCrawler implements IPageUtils {
     }
 
     public void crawlPage(int crawlingDepth, Page parent, int depth) {
-        for(int i = 0; i < depth;i++){ System.out.print("  "); } // leading spaces
+        for(int i = 0; i < depth;i++){ System.out.print("   "); } // leading spaces
         System.out.println("Start " + parent.getPageURL());
-
 
         jsoupWrapper.scan(this, parent.getPageURL());
         parent.setStatusCode(jsoupWrapper.getStatusCode());

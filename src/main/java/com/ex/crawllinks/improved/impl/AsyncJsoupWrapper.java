@@ -8,16 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 public class AsyncJsoupWrapper implements Runnable {
-    @Autowired
     private JsoupWrapper jsoupWrapper;
 
     private IAsyncCrawler crawler;
     private IPageUtils pageUtils;
     private String url;
+    private int depth;
 
-    public AsyncJsoupWrapper(String url, IPageUtils pageUtils, IAsyncCrawler crawler) {
+    public AsyncJsoupWrapper(String url, int depth, IPageUtils pageUtils, IAsyncCrawler crawler) {
         this.pageUtils = pageUtils;
         this.url = url;
+        this.depth = depth;
         this.crawler = crawler;
     }
 
@@ -31,8 +32,13 @@ public class AsyncJsoupWrapper implements Runnable {
 
     @Override
     public void run() {
+        this.jsoupWrapper = new JsoupWrapper();
         this.jsoupWrapper.scan(pageUtils, url);
-        crawler.done();
+        crawler.done(getPageLinks(), getStatusCode(), depth);
+    }
+
+    private int getStatusCode() {
+        return jsoupWrapper.getStatusCode();
     }
 }
 
