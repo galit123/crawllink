@@ -1,19 +1,14 @@
 package com.ex.crawllinks.impl;
 
-import com.ex.crawllinks.errorhandling.CrawlLinksRuntimeException;
 import org.jsoup.Connection;
-import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class JsoupWrapper {
     private int statusCode;
@@ -21,7 +16,7 @@ public class JsoupWrapper {
     private List<Page> pageLinks = null;
 
     public JsoupWrapper(IPageUtils pageUtils) {
-        pageUtils = pageUtils;
+        this.pageUtils = pageUtils;
     }
 
     public int getStatusCode() {

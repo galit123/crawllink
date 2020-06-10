@@ -50,12 +50,13 @@ public class PageCrawler implements IPageUtils {
             return;
         }
         parent.setPageLinks(jsoupWrapper.getPageLinks());
-
-        int i = 0;
-        for (Page link : parent.getPageLinks()) {
-            System.out.println(depth + "." + i + ", url = " + link.getPageURL());
-            crawlPage(crawlingDepth, depth + 1, link);
-            i++;
+        if (parent.getPageLinks() != null) {
+            int i = 0;
+            for (Page link : parent.getPageLinks()) {
+                System.out.println(depth + "." + i + ", url = " + link.getPageURL());
+                crawlPage(crawlingDepth, depth + 1, link);
+                i++;
+            }
         }
 
         System.out.println("Done children of " + parent.getPageURL());
