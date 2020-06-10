@@ -1,6 +1,7 @@
 package com.ex.crawllinks.impl;
 
 import com.ex.crawllinks.errorhandling.CrawlLinksRuntimeException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -10,6 +11,8 @@ import java.util.Set;
 public class PageCrawler implements IPageUtils {
     private Set<String> alreadyVisited = new HashSet<String>();
 
+    @Autowired
+    private JsoupWrapper jsoupWrapper ;
     public static Set<String> notScannable = new HashSet<String>();
 
     static {
@@ -31,24 +34,20 @@ public class PageCrawler implements IPageUtils {
 
     }
 
-
-    public void init(Page root) {
+    public void initialize(String url){
         alreadyVisited.clear();
-        alreadyVisited.add(root.getPageURL());
-
-        if (!isValid(root.getPageURL())) {
+        alreadyVisited.add(url);
+        if (!isValid(url)){
             throw new CrawlLinksRuntimeException("url is not valid");
         }
     }
 
-    public void crawlPage(int crawlingDepth, int depth, Page parent) {
-        for(int i = 0; i < depth;i++){ System.out.print(" "); } // leading spaces
-
+    public void crawlPage(int crawlingDepth, Page parent, int depth) {
+        for(int i = 0; i < depth;i++){ System.out.print("  "); } // leading spaces
         System.out.println("Start " + parent.getPageURL());
 
-        JsoupWrapper jsoupWrapper = new JsoupWrapper(this);
-        jsoupWrapper.scan(parent.getPageURL());
 
+        jsoupWrapper.scan(this, parent.getPageURL());
         parent.setStatusCode(jsoupWrapper.getStatusCode());
         if (depth >= crawlingDepth) {
             return;
@@ -56,7 +55,7 @@ public class PageCrawler implements IPageUtils {
         parent.setPageLinks(jsoupWrapper.getPageLinks());
         if (parent.getPageLinks() != null) {
             for (Page link : parent.getPageLinks()) {
-                crawlPage(crawlingDepth, depth + 1, link);
+                crawlPage(crawlingDepth, link, depth + 1);
             }
         }
 
@@ -99,5 +98,6 @@ public class PageCrawler implements IPageUtils {
         alreadyVisited.add(url);
         return false;
     }
-}
+
+ }
 

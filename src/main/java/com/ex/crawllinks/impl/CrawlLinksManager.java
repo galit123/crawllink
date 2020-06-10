@@ -7,23 +7,21 @@ import java.util.Date;
 
 @Component
 public class CrawlLinksManager {
-
     @Autowired
     private PageCrawler pageCrawler;
 
-    public Page crawlLinks(String URL, int crawlingDepth) {
+    public Page crawlLinks(String url, int crawlingDepth) {
         System.out.println("Start CrawlLinks");
 
         long start = new Date().getTime();
-        Page root = new Page(URL);
-        pageCrawler.init(root);
+        pageCrawler.initialize(url);
 
-        pageCrawler.crawlPage(crawlingDepth, 0, root);
+        Page root = new Page(url);
+        pageCrawler.crawlPage(crawlingDepth, root,0);
         long end = new Date().getTime();
         long time = end - start;
 
         System.out.println("Finished in " + time / 1000 + " sec");
         return root;
     }
-
 }

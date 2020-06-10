@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"com.ex.crawllinks"})
+@ComponentScan({"com.ex.crawllinks", "com.ex.crawllinks.improved"})
 public class CrawllinksApplication {
 
 	public static void main(String[] args) {

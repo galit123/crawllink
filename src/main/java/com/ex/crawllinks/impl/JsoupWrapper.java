@@ -5,19 +5,17 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JsoupWrapper {
     private int statusCode;
     private IPageUtils pageUtils;
     private List<Page> pageLinks = null;
-
-    public JsoupWrapper(IPageUtils pageUtils) {
-        this.pageUtils = pageUtils;
-    }
 
     public int getStatusCode() {
         return statusCode;
@@ -27,8 +25,10 @@ public class JsoupWrapper {
         return pageLinks;
     }
 
-
-    public void scan(String url) {
+    public void scan(IPageUtils pageUtils, String url) {
+        if (!pageUtils.isValid(url)){
+            return;
+        }
         Connection connection = Jsoup.connect(url);
         Document document = null;
         this.statusCode = 0;
@@ -57,5 +57,4 @@ public class JsoupWrapper {
         }
         this.pageLinks = pages;
     }
-
 }
